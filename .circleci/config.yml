@@ -181,6 +181,7 @@ jobs:
             pip install awscli
       - run:
           name: Run Playbook and Configure server
+          no_output_timeout: 10m
           command: |
             cat .circleci/ansible/inventory.txt
             cd .circleci/ansible
