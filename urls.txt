@@ -1,0 +1,2 @@
+https://github.com/herat130/cdond-c3-projectstarter
+http://udapeople-f41c67d.s3-website-us-west-2.amazonaws.com

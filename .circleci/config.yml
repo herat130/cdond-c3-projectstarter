@@ -362,12 +362,13 @@ jobs:
             echo Current Workflow Id: "$CIRCLE_WORKFLOW_ID:0:7"
             export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
               --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
-            echo "$STACKS[*]"
+            echo "$STACKS[@]"
             if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
               then
+                echo "stack deleted started"
                 aws s3 rb "s3://udapeople-${OldWorkflowID}" --force
-                aws cloudformation delete-stack --stack-name "udapeople-backend-${previousWorkFlowID}"
-                aws cloudformation delete-stack --stack-name "udapeople-frontend-${previousWorkFlowID}"
+                aws cloudformation delete-stack --stack-name "udapeople-backend-${OldWorkflowID}"
+                aws cloudformation delete-stack --stack-name "udapeople-frontend-${OldWorkflowID}"
                 echo "stack deleted successfully"
             fi
       - destroy_environment:
